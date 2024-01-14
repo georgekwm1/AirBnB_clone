@@ -10,8 +10,8 @@ class FileStorage():
         return FileStorage.__objects.items()
     
     def new(self, obj):
-        class_name = obj.__class__.__name__
-        FileStorage.__objects.append(f"{class_name}.{obj.id}")
+        class_name = f"{obj.__class__.__name__}.{obj.id}"
+        FileStorage.__objects[class_name] = str(obj)
 
     def save(self):
         my_string = json.dumps(self.__objects)
