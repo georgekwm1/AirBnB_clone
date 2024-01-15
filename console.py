@@ -28,7 +28,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             if args == "BaseModel":
-                my_instance = BaseModel()
+                my_instancecre = BaseModel()
                 my_instance.save()
                 print(my_instance.id)
             else:
