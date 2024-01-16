@@ -35,8 +35,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             for cls in classes:
-                if args == f"{cls}":
-                    my_instance = f"{cls}"()
+                if args == cls.__name__:
+                    my_instance = cls()
                     my_instance.save()
                     print(my_instance.id)
                 else:
@@ -61,7 +61,7 @@ class HBNBCommand(cmd.Cmd):
 
                 else:
                     key = f"{cls}.{my_args[1]}"
-                    my_instance = f"{cls}"(storage.all()[key])
+                    my_instance = cls.__name__(storage.all()[key])
                     print(my_instance)
 
     def do_destroy(self, args):
