@@ -27,29 +27,22 @@ class FileStorage:
         with open(FileStorage.__file_path, "w") as file:
             my_dict = FileStorage.__objects
             my_dict = {key: my_dict[key].to_dict() for key in my_dict.keys()}
-            for (keyA, valueA), (keyC, valueC), (keyP, valueP), (keyR, valueR), (keyS, valueS), (keyU, valueU) in zip(Amenity.__dict__.items(), City.__dict__.items(), Place.__dict__.items(), Review.__dict__.items(), State.__dict__.items(), User.__dict__.items()) :
-                
-                my_dict[keyA] = valueA
-                my_dict[keyC] = valueC
-                if keyC == "state_id":
-                    valueC = State.id
-
-                my_dict[keyP] = valueP
-                if keyP == "city_id":
-                    valueP = City.id
-                if keyP == "user_id":
-                    valueP = User.id
-                if keyP == "amenity_ids":
-                    valueP = Amenity.id
-
-                my_dict[keyR] = valueR
-                if keyR == "place_id":
-                    valueR = City.id
-                if keyR == "user_id":
-                    valueR = User.id
+            classes = [Amenity, City, Place, Review, State, User]
+            for cls in classes:
+                for key, value in cls.to_dict().items():
+                    if key == 'state_id':
+                        value = f"{cls.__name__}.{cls.id}"
+                    if key == 'city_id':
+                        value = f"{cls.__name__}.{cls.id}"
+                    if key == 'user_id':
+                        value = f"{cls.__name__}.{cls.id}"
+                    if key == 'amenity_ids':
+                        value = f"{cls.__name__}.{cls.id}"
+                    if key == 'place_id':
+                        value = f"{cls.__name__}.{cls.id}"
+                    if key == 'user_id':
+                        value = f"{cls.__name__}.{cls.id}"
                     
-                my_dict[keyS] = valueS
-                my_dict[keyU] = valueU
             json.dump(my_dict, file)
 
     def reload(self):
