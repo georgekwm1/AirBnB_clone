@@ -4,6 +4,12 @@ import cmd
 from models.base_model import BaseModel
 from models import storage
 from models.engine.file_storage import FileStorage
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
@@ -24,58 +30,62 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """Creates a new instance of BaseModel."""
+        classes = [Amenity, BaseModel, City, Place, Review, State, User]
         if not args:
             print("** class name missing **")
         else:
-            if args == "BaseModel":
-                my_instancecre = BaseModel()
-                my_instance.save()
-                print(my_instance.id)
-            else:
-                print("** class doesn't exit **")
+            for cls in classes:
+                if args == f"{cls}":
+                    my_instance = f"{cls}"()
+                    my_instance.save()
+                    print(my_instance.id)
+                else:
+                    print("** class doesn't exit **")
 
     def do_show(self, args):
         """ Prints the string representation of an instance"""
-
+        classes = [Amenity, BaseModel, City, Place, Review, State, User]
         if not args:
             print("** class name missing **")
         else:
-            my_args = args.split()
-            if my_args[0] != "BaseModel":
-                print("** class doesn't exist **")
+            for cls in classes:
+                my_args = args.split()
+                if my_args[0] != f"{cls}":
+                    print("** class doesn't exist **")
 
-            elif len(my_args) < 2:
-                print("** instance id missing **")
+                elif len(my_args) < 2:
+                    print("** instance id missing **")
 
-            elif f"BaseModel.{my_args[1]}" not in storage.all().keys():
-                print("** no instance found **")
+                elif f"{cls}.{my_args[1]}" not in storage.all().keys():
+                    print("** no instance found **")
 
-            else:
-                key = f"BaseModel.{my_args[1]}"
-                my_instance = BaseModel(storage.all()[key])
-                print(my_instance)
+                else:
+                    key = f"{cls}.{my_args[1]}"
+                    my_instance = f"{cls}"(storage.all()[key])
+                    print(my_instance)
 
     def do_destroy(self, args):
         """Deletes an instance based on the class name and id"""
-
+        classes = [Amenity, BaseModel, City, Place, Review, State, User]
         if not args:
             print("** class name missing **")
 
         else:
-            my_args = args.split()
-            if my_args[0] != "BaseModel":
-                print("** class doesn't exist **")
+            for cls in classes:
+                my_args = args.split()
+                if my_args[0] != f"{cls}":
+                    print("** class doesn't exist **")
 
-            elif len(my_args) < 2:
-                print("** instance id missing **")
+                elif len(my_args) < 2:
+                    print("** instance id missing **")
 
-            elif f"BaseModel.{my_args[1]}" not in storage.all().keys():
-                print("** no instance found **")
+                elif f"{cls}.{my_args[1]}" not in storage.all().keys():
+                    print("** no instance found **")
 
-            else:
-                key = f"BaseModel.{my_args[1]}"
-                del storage.all()[key]
-                storage.save()
+                else:
+                    key = f"{cls}.{my_args[1]}"
+                    del storage.all()[key]
+                    storage.save()
 
     def do_all(self, args):
         """Prints all string representation of all instances"""
@@ -133,4 +143,8 @@ class HBNBCommand(cmd.Cmd):
 
 
 if __name__ == "__main__":
-    HBNBCommand().cmdloop()
+    import sys
+    if len(sys.argv) > 1:
+        HBNBCommand().onecmd(' '.join(sys.argv[1:]))
+    else:
+        HBNBCommand().cmdloop()
