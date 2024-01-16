@@ -34,12 +34,15 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
         else:
+            class_found = False
             for cls in classes:
                 if args == cls.__name__:
                     my_instance = cls()
                     my_instance.save()
                     print(my_instance.id)
-                else:
+                    class_found = True
+                    break
+                if not class_found:
                     print("** class doesn't exit **")
 
     def do_show(self, args):
