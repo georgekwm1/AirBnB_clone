@@ -1,8 +1,10 @@
 from models.base_model import BaseModel
 
+
 class Place(BaseModel):
     """Place class represents a place in a city. It has an id, name and actions
     associated with it."""
+
     city_id = ""
     user_id = ""
     name = ""

@@ -46,7 +46,7 @@ class HBNBCommand(cmd.Cmd):
                     print("** class doesn't exit **")
 
     def do_show(self, args):
-        """ Prints the string representation of an instance"""
+        """Prints the string representation of an instance"""
         classes = [Amenity, BaseModel, City, Place, Review, State, User]
         if not args:
             print("** class name missing **")
@@ -102,7 +102,7 @@ class HBNBCommand(cmd.Cmd):
                     my_list.append(str(my_instance))
                 print(my_list)
                 break
-            
+
             elif args == f"{cls}.{cls.all()}":
                 for key in my_dict.keys():
                     my_instance = cls.__name__(**my_dict[key])
@@ -112,7 +112,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
 
     def do_update(self, args):
-        """ Updates an instance based on the class name and id"""
+        """Updates an instance based on the class name and id"""
 
         my_dict = storage.all()
         if not args:
@@ -139,8 +139,8 @@ class HBNBCommand(cmd.Cmd):
                             my_value = my_value.strip('"')
                         elif my_value.isdigit():
                             my_value = int(my_value)
-                        elif my_value[0] == '-':
-                            if my_value.replace('-', '').isdigit():
+                        elif my_value[0] == "-":
+                            if my_value.replace("-", "").isdigit():
                                 my_value = int(my_value)
                         else:
                             try:
@@ -154,7 +154,8 @@ class HBNBCommand(cmd.Cmd):
 
 if __name__ == "__main__":
     import sys
+
     if len(sys.argv) > 1:
-        HBNBCommand().onecmd(' '.join(sys.argv[1:]))
+        HBNBCommand().onecmd(" ".join(sys.argv[1:]))
     else:
         HBNBCommand().cmdloop()
