@@ -92,17 +92,24 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         """Prints all string representation of all instances"""
-
+        classes = [Amenity, BaseModel, City, Place, Review, State, User]
         my_dict = storage.all()
         my_list = []
-        if not args or args == "BaseModel":
-            for key in my_dict.keys():
-                my_instance = BaseModel(**my_dict[key])
-                my_list.append(str(my_instance))
-            print(my_list)
-
-        else:
-            print("** class doesn't exist **")
+        for cls in classes:
+            if not args or args == f"{cls}":
+                for key in my_dict.keys():
+                    my_instance = cls.__name__(**my_dict[key])
+                    my_list.append(str(my_instance))
+                print(my_list)
+                break
+            
+            elif args == f"{cls}.{cls.all()}":
+                for key in my_dict.keys():
+                    my_instance = cls.__name__(**my_dict[key])
+                    my_list.append(str(my_instance))
+                print(my_list)
+            else:
+                print("** class doesn't exist **")
 
     def do_update(self, args):
         """ Updates an instance based on the class name and id"""
