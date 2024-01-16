@@ -119,7 +119,7 @@ class HBNBCommand(cmd.Cmd):
                             my_value = my_value.strip('"')
                         elif my_value.isdigit():
                             my_value = int(my_value)
-                        elif my_vlue[0] == '-':
+                        elif my_value[0] == '-':
                             if my_value.replace('-', '').isdigit():
                                 my_value = int(my_value)
                         else:
