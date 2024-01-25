@@ -33,7 +33,7 @@ class BaseModel:
             else:
                 my_dict[key] = value
 
-        my_dict["__class__"] = __class__.__name__
+        my_dict["__class__"] =self. __class__.__name__
         return my_dict
 
     def __str__(self):
