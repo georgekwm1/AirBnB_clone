@@ -1,0 +1,36 @@
+body {
+    margin: 0; 
+    padding: 0; 
+    color : #484848; 
+    font-size: 14px;
+    font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+
+}
+
+.container {
+    max-width: 1000px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    left: 30px;
+    right: 30px;
+    color: rgb(11, 12, 12);
+    position: absolute;
+}
+
+button {
+    position: absolute;
+    font-size: 18px;
+    background-color: #FF5A5F;
+    color:  #FFFFFF;
+    height: 48px;
+    width: 20%;
+    border: 0;
+    border-radius: 4px;
+    align-items: center;
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+}
+button:hover {
+    opacity: 90%;
+}
